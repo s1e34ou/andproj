@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
 							public void run() {
 								text.setText(String.format(ac + 73 + "dB", ac));
 								text.setText(ac + 73 + " dB");
+								System.out.println("d");
 
 							}
 						});
