@@ -44,8 +44,6 @@ public class MainActivity extends Activity {
 
 							}
 						});
-						// text.setText(String.format(dB+73 + "dB", dB)); 1번
-						// text.setText(dB+73 +" dB"); 2번
 					}
 
 					@Override
@@ -61,8 +59,6 @@ public class MainActivity extends Activity {
 
 	private void receiveDecibel(final int dB) {
 		Log.e("###", dB + 73 + " dB"); // Logcat에 데시벨이 -70~ -73으로 출력이되어 73을더한다.
-		// text.setText(String.format(dB+73 + "dB", dB)); 3번
-		// text.setText(dB+73 +" dB"); 4번
 	}
 
 	@Override
