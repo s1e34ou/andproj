@@ -25,7 +25,12 @@
             </intent-filter>
         </activity>
         
-       
+       <service android:name=".NoService">
+            <intent-filter>
+                 <action android:name="com.example.notest.NoService"/> 
+            </intent-filter>
+        </service>
+        
         
     </application>
 

@@ -29,15 +29,17 @@
             android:id="@+id/start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="doStart"
-            android:text="start" />
+            android:text="start" 
+            android:onClick="onClick"
+            />
 
         <Button
             android:id="@+id/end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="doEnd"
-            android:text="end" />
+            android:text="end" 
+            android:onClick="onClick"
+            />
 
     </LinearLayout>
 
