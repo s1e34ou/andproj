@@ -15,8 +15,8 @@ import android.widget.TextView;
 public class Activity_Test extends Activity {
 	int a;
 	TextView t1;
-	SeekBar sb ;
-	
+	SeekBar sb1,sb2 ;
+	Boolean ntos=true;
 	View nsSelect;
 	View snSelect;
 
@@ -25,7 +25,9 @@ public class Activity_Test extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
-		sb=(SeekBar)findViewById(R.id.SeekBar01);
+		sb1=(SeekBar)findViewById(R.id.sb1);
+		
+		sb2=(SeekBar)findViewById(R.id.sb2);
 		setContentView(R.layout.activity_activity__test);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		t1=(TextView)findViewById(R.id.textView2);
@@ -45,6 +47,7 @@ public class Activity_Test extends Activity {
 		spinner1.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
 		spinner3.setAdapter(adapter);
+
 		
 		
 	}
@@ -55,6 +58,7 @@ public class Activity_Test extends Activity {
 		switch (v.getId()) {
 		case R.id.stbt: {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
+			
 			startService(serviceIntent);
 			break;
 			}
@@ -68,12 +72,14 @@ public class Activity_Test extends Activity {
 		case R.id.ns:{
 			snSelect.setVisibility(8);
 			nsSelect.setVisibility(0);
+			ntos=true;
 			break;
 			}
 		// 3. silent->noise
 		case R.id.sn:{
 			snSelect.setVisibility(0);
 			nsSelect.setVisibility(8);
+			ntos=false;
 			break;
 			}
 
