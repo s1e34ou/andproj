@@ -33,7 +33,7 @@ public class NoService extends Service{
 		
 		am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         
-        Intent intent = new Intent(this, MainActivity.class );
+        Intent intent = new Intent(this, Activity_Test.class );
         PendingIntent pIntent = PendingIntent.getActivity( this, 0, intent, 
                                             PendingIntent.FLAG_UPDATE_CURRENT);
         Notification noti = new Notification.Builder(this)
