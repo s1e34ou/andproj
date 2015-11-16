@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class Activity_Test extends Activity {
 
@@ -11,6 +13,18 @@ public class Activity_Test extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_activity__test);
+		
+		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		Spinner spinner1 = (Spinner) findViewById(R.id.spinner2);
+		Spinner spinner2 = (Spinner) findViewById(R.id.spinner3);
+		Spinner spinner3 = (Spinner) findViewById(R.id.spinner4);
+		
+		ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_item);
+		
+		spinner.setAdapter(adapter);
+		spinner1.setAdapter(adapter);
+		spinner2.setAdapter(adapter);
+		spinner3.setAdapter(adapter);
 	}
 
 	@Override
