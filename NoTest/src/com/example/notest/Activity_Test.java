@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,18 +21,18 @@ public class Activity_Test extends Activity {
 	Boolean ntos=true;
 	View nsSelect;
 	View snSelect;
+	
+	SeekBar seekbar;
+	EditText text;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
-		sb1=(SeekBar)findViewById(R.id.sb1);
 		
-		sb2=(SeekBar)findViewById(R.id.sb2);
 		setContentView(R.layout.activity_activity__test);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		t1=(TextView)findViewById(R.id.textView2);
 		
 		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 		Spinner spinner1 = (Spinner) findViewById(R.id.spinner2);
@@ -39,6 +41,27 @@ public class Activity_Test extends Activity {
 		
 		nsSelect = findViewById(R.id.nsSelect);
 		snSelect = findViewById(R.id.snSelect);
+		
+		seekbar = (SeekBar) findViewById(R.id.nsSeekbar);
+		text = (EditText) findViewById(R.id.nsSeektext);
+		seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				
+			}
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				a=progress;
+				text.setText(String.valueOf(progress));
+			}
+		});
 		
 		ArrayAdapter adapter =
 				ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_item);
@@ -58,7 +81,9 @@ public class Activity_Test extends Activity {
 		switch (v.getId()) {
 		case R.id.stbt: {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
-			
+			serviceIntent.putExtra("noise", seekbar.getProgress());
+			serviceIntent.putExtra("ntos", ntos);
+			System.out.println("click:"+a);
 			startService(serviceIntent);
 			break;
 			}
