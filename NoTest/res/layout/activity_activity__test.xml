@@ -14,10 +14,13 @@
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
             android:text="TITLE"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:gravity="center" />
+            android:textSize="30dp" />
+
 
         <Button
             android:id="@+id/stbt"
@@ -25,10 +28,9 @@
             android:layout_height="wrap_content"
             android:text="START"
             android:layout_marginTop="50dp" 
-                        android:onClick="onClick"
-            
-            />
-
+                        android:onClick="onClick"><requestFocus /> </Button>
+        
+		
         <Button
             android:id="@+id/ebt"
             android:layout_width="match_parent"
@@ -44,16 +46,18 @@
             android:layout_marginTop="20dp" >
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/ns"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="noise -> silent" />
+                android:text="noise -> silent"
+                android:onClick="onClick" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/sn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="silent -> noise" />
+                android:text="silent -> noise"
+                android:onClick="onClick" />
 
         </LinearLayout>
 
@@ -61,13 +65,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible" >
+            android:visibility="visible"
+            android:id="@+id/nsSelect" >
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:ignoreGravity="@+id/Spinner01" >
+                android:ignoreGravity="@+id/spinner1" >
 
                 <Spinner
                     android:id="@+id/spinner1"
@@ -103,6 +108,7 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="number" />
+                  
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -111,13 +117,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" 
-            android:visibility="gone">
+            android:visibility="gone"
+            android:id="@+id/snSelect">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:ignoreGravity="@+id/spinner1" >
+                android:ignoreGravity="@+id/spinner3" >
 
                 <Spinner
                     android:id="@+id/spinner3"
@@ -152,9 +159,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
+                        android:text="1234"
                         android:inputType="number" >
 
-                        <requestFocus />
                     </EditText>
                 </LinearLayout>
             </LinearLayout>

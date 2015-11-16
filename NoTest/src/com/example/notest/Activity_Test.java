@@ -1,5 +1,6 @@
 package com.example.notest;
 
+import android.R.layout;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -11,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 public class Activity_Test extends Activity {
+	
+	View nsSelect;
+	View snSelect;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +27,20 @@ public class Activity_Test extends Activity {
 		Spinner spinner2 = (Spinner) findViewById(R.id.spinner3);
 		Spinner spinner3 = (Spinner) findViewById(R.id.spinner4);
 		
-		ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_item);
+		nsSelect = findViewById(R.id.nsSelect);
+		snSelect = findViewById(R.id.snSelect);
+		
+		ArrayAdapter adapter =
+				ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_item);
 		
 		spinner.setAdapter(adapter);
 		spinner1.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
 		spinner3.setAdapter(adapter);
+		
+		
 	}
+	
 
 	public void onClick(View v) {
 		
@@ -38,17 +49,27 @@ public class Activity_Test extends Activity {
 		case R.id.stbt: {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			startService(serviceIntent);
-			
-			
 			break;
-		}
+			}
 
 		// 2. 카운트 종료
 		case R.id.ebt: {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			stopService(serviceIntent);
 			break;
-		}
+			}
+		// 3. noise->silent
+		case R.id.ns:{
+			snSelect.setVisibility(8);
+			nsSelect.setVisibility(0);
+			break;
+			}
+		// 3. silent->noise
+		case R.id.sn:{
+			snSelect.setVisibility(0);
+			nsSelect.setVisibility(8);
+			break;
+			}
 
 		}
 		
