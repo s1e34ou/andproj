@@ -9,12 +9,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class Activity_Test extends Activity {
 	
 	View nsSelect;
 	View snSelect;
+	
+	SeekBar seekbar;
+	EditText text;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,28 @@ public class Activity_Test extends Activity {
 		nsSelect = findViewById(R.id.nsSelect);
 		snSelect = findViewById(R.id.snSelect);
 		
+		seekbar = (SeekBar) findViewById(R.id.nsSeekbar);
+		text = (EditText) findViewById(R.id.nsSeektext);
+		seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				
+			}
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				text.setText(String.valueOf(progress));
+			}
+		});
+		
+		
+		
 		ArrayAdapter adapter =
 				ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_item);
 		
@@ -40,6 +68,8 @@ public class Activity_Test extends Activity {
 		
 		
 	}
+	
+	
 	
 
 	public void onClick(View v) {
