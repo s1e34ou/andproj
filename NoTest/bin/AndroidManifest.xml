@@ -16,20 +16,21 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppBaseTheme"
+        >
         <activity
             android:name=".Activity_Test"
             android:label="@string/title_activity_activity__test" >
-             <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-           
-            <service android:name=".NoService">
+
+        <service android:name=".NoService" >
             <intent-filter>
-                 <action android:name="com.example.notest.NoService"/> 
+                <action android:name="com.example.notest.NoService" />
             </intent-filter>
         </service>
     </application>
