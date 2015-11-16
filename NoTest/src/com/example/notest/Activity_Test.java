@@ -4,19 +4,26 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class Activity_Test extends Activity {
-
+	int a;
+	TextView t1;
+	SeekBar sb ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		sb=(SeekBar)findViewById(R.id.SeekBar01);
 		setContentView(R.layout.activity_activity__test);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		t1=(TextView)findViewById(R.id.textView2);
 		
 		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 		Spinner spinner1 = (Spinner) findViewById(R.id.spinner2);
@@ -29,12 +36,34 @@ public class Activity_Test extends Activity {
 		spinner1.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
 		spinner3.setAdapter(adapter);
+		sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
 	}
-
+	
 	public void onClick(View v) {
 		
 		switch (v.getId()) {
-		// 1. 카운트 시작
 		case R.id.stbt: {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			startService(serviceIntent);
@@ -43,7 +72,6 @@ public class Activity_Test extends Activity {
 			break;
 		}
 
-		// 2. 카운트 종료
 		case R.id.ebt: {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			stopService(serviceIntent);
@@ -53,22 +81,5 @@ public class Activity_Test extends Activity {
 		}
 		
 	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity__test, menu);
-		return true;
-	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 }

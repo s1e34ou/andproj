@@ -28,6 +28,10 @@ public class NoService extends Service{
     {
         super.onCreate();
         Log.i("superdroid", "onCreate()");
+        ac = new int[interval];
+        for(int i=0;i<ac.length;i++){
+        	ac[i]=0;
+        }
         
         audioReader = new AudioReader();
 		
@@ -38,7 +42,7 @@ public class NoService extends Service{
                                             PendingIntent.FLAG_UPDATE_CURRENT);
         Notification noti = new Notification.Builder(this)
                                       .setContentTitle("NoTest")
-                                      .setContentText("Running NoTest")
+                                      .setContentText("실행중")
                                       .setSmallIcon( R.drawable.ic_launcher )
                                       .setContentIntent( pIntent )
                                       .build();
@@ -52,7 +56,7 @@ public class NoService extends Service{
     {
         super.onStartCommand( intent, flags, startId );
         Log.i("superdroid", "onStartCommand()");
-    	ac = new int[interval];
+    	
 		audioReader.startReader(sampleRate, inputBlockSize * sampleDecimate,
 				new AudioReader.Listener() {
 					@Override
@@ -64,7 +68,6 @@ public class NoService extends Service{
 							public void run() {
 								
 								if(ac[0]>0){
-								   
 
 								};
 								//text.setText(ac[0] + " dB"); // 앱에 데시벨 표시
