@@ -5,6 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -12,6 +15,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class Activity_Test extends Activity {
 	int a;
@@ -45,14 +49,9 @@ public class Activity_Test extends Activity {
 		seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				
-			}
+			public void onStopTrackingTouch(SeekBar seekBar) {}
 			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void onStartTrackingTouch(SeekBar seekBar) {}
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
@@ -60,6 +59,23 @@ public class Activity_Test extends Activity {
 			}
 		});
 		
+		text.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {}
+			@Override
+			public void afterTextChanged(Editable a) {
+				try{
+				String filtered_str = a.toString();
+				if(Integer.parseInt(filtered_str) >=0 && Integer.parseInt(filtered_str) <=100){
+					seekbar.setProgress(Integer.parseInt(filtered_str));
+					}
+				}catch(Exception e){}
+			}
+		});
 		
 		ArrayAdapter adapter =
 				ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_item);
@@ -68,10 +84,7 @@ public class Activity_Test extends Activity {
 		spinner1.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
 		spinner3.setAdapter(adapter);
-		
-		
 	}
-	
 
 	public void onClick(View v) {
 		
@@ -99,6 +112,9 @@ public class Activity_Test extends Activity {
 			nsSelect.setVisibility(8);
 			break;
 			}
+		case R.id.save:{
+			
+		}
 
 		}
 		
