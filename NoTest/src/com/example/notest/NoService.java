@@ -24,6 +24,8 @@ public class NoService extends Service{
 	int[] ac; // 데시벨 저장
 	int sum, avg;
 	AudioManager am;
+	int noise;
+	boolean ntos;
     public void onCreate()
     {
         super.onCreate();
@@ -32,7 +34,6 @@ public class NoService extends Service{
         for(int i=0;i<ac.length;i++){
         	ac[i]=0;
         }
-        
         audioReader = new AudioReader();
 		
 		am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -56,7 +57,9 @@ public class NoService extends Service{
     {
         super.onStartCommand( intent, flags, startId );
         Log.i("superdroid", "onStartCommand()");
-    	
+    	noise = intent.getIntExtra("noise", 0);
+    	ntos=intent.getBooleanExtra("ntos", true);
+    	System.out.println("sc:"+noise);
 		audioReader.startReader(sampleRate, inputBlockSize * sampleDecimate,
 				new AudioReader.Listener() {
 					@Override
@@ -91,6 +94,7 @@ public class NoService extends Service{
 								}
 
 								// 상태변화
+								if(ntos==true){
 								switch (am.getRingerMode()) {
 								case AudioManager.RINGER_MODE_SILENT:
 									Log.i("MyApp", "Silent mode");
@@ -100,12 +104,12 @@ public class NoService extends Service{
 									break;
 								case AudioManager.RINGER_MODE_NORMAL:
 									Log.i("MyApp", "Normal mode");
-									if (avg < 30) {
+									if (avg < noise) {
 										am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 									}
 									break;
 
-								}
+								}}else{}
 
 							}
 						});

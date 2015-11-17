@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -20,8 +21,8 @@ import android.widget.TextView.OnEditorActionListener;
 public class Activity_Test extends Activity {
 	int a;
 	TextView t1;
-	SeekBar sb ;
-	
+	SeekBar sb1,sb2 ;
+	Boolean ntos=true;
 	View nsSelect;
 	View snSelect;
 	
@@ -32,6 +33,7 @@ public class Activity_Test extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		
 		setContentView(R.layout.activity_activity__test);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -55,6 +57,7 @@ public class Activity_Test extends Activity {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
+				a=progress;
 				text.setText(String.valueOf(progress));
 			}
 		});
@@ -84,6 +87,7 @@ public class Activity_Test extends Activity {
 		spinner1.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
 		spinner3.setAdapter(adapter);
+		
 	}
 
 	public void onClick(View v) {
@@ -91,6 +95,9 @@ public class Activity_Test extends Activity {
 		switch (v.getId()) {
 		case R.id.stbt: {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
+			serviceIntent.putExtra("noise", seekbar.getProgress());
+			serviceIntent.putExtra("ntos", ntos);
+			System.out.println("click:"+a);
 			startService(serviceIntent);
 			break;
 			}
@@ -104,12 +111,14 @@ public class Activity_Test extends Activity {
 		case R.id.ns:{
 			snSelect.setVisibility(8);
 			nsSelect.setVisibility(0);
+			ntos=true;
 			break;
 			}
 		// 3. silent->noise
 		case R.id.sn:{
 			snSelect.setVisibility(0);
 			nsSelect.setVisibility(8);
+			ntos=false;
 			break;
 			}
 		case R.id.save:{
