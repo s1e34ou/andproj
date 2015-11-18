@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 public class Activity_Test extends Activity {
 	int a, a2, act,avg;
-	TextView t1;
+	TextView t1,t2;
 	SeekBar sb1, sb2;
 	Boolean ntos = true;
 	View nsSelect;
@@ -68,8 +68,8 @@ public class Activity_Test extends Activity {
 					act = intent.getIntExtra("act", 0);
 					avg = intent.getIntExtra("avg", 0);
 					System.out.println("act:" + act);
-						t1.setText("ÇöÀç dB : "+act+", Æò±Õ dB : "+avg);	
-					
+						t1.setText("ÇöÀç dB : "+act);	
+						t2.setText("Æò±Õ dB : "+avg);
 
 				}
 
@@ -87,6 +87,7 @@ public class Activity_Test extends Activity {
 		nsSelect = findViewById(R.id.nsSelect);
 		snSelect = findViewById(R.id.snSelect);
 		t1 = (TextView) findViewById(R.id.textView2);
+		t2=(TextView) findViewById(R.id.TextView01);
 		ntos = true;
 		seekbar = (SeekBar) findViewById(R.id.nsSeekbar);
 		text = (EditText) findViewById(R.id.nsSeektext);

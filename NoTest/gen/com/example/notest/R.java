@@ -28,7 +28,8 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000f;
+        public static final int TextView01=0x7f09000f;
+        public static final int action_settings=0x7f090010;
         public static final int ebt=0x7f09000c;
         public static final int editText1=0x7f09000a;
         public static final int help=0x7f09000d;
