@@ -169,10 +169,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/save"
+            android:id="@+id/help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SAVE" />
+            android:text="Help" />
 		
      </LinearLayout>
     

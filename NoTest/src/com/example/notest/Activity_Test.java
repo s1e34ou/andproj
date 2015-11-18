@@ -29,6 +29,10 @@ public class Activity_Test extends Activity {
 	EditText text,text2;
 	String spin, spin2;
 	Spinner spinner, spinner2;
+	
+	
+	Button ns;
+	Button sn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,10 @@ public class Activity_Test extends Activity {
 		spinner = (Spinner) findViewById(R.id.spinner1);
 		spinner2 = (Spinner) findViewById(R.id.spinner3);
 
+		
+		ns = (Button) findViewById(R.id.ns);
+		sn = (Button) findViewById(R.id.sn);
+		
 		nsSelect = findViewById(R.id.nsSelect);
 		snSelect = findViewById(R.id.snSelect);
 
@@ -201,18 +209,22 @@ public class Activity_Test extends Activity {
 			snSelect.setVisibility(8);
 			nsSelect.setVisibility(0);
 
-			ntos = true;
+			ns.setEnabled(false);
+			sn.setEnabled(true);
+			ntos=true;
 			break;
 		}
 		// 3. silent->noise
 		case R.id.sn: {
 			snSelect.setVisibility(0);
 			nsSelect.setVisibility(8);
-			ntos = false;
+			ns.setEnabled(true);
+			sn.setEnabled(false);
+			ntos=false;
 			break;
 		}
-		case R.id.save: {
-
+		case R.id.help:{
+			
 		}
 
 		}
