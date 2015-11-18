@@ -49,15 +49,16 @@
                 android:id="@+id/ns"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="noise -> silent"
-                android:onClick="onClick" />
+                android:onClick="onClick"
+                android:text="noise -> silent" />
 
             <Button
                 android:id="@+id/sn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="silent -> noise"
-                android:onClick="onClick" />
+                android:enabled="true"
+                android:onClick="onClick"
+                android:text="silent -> noise" />
 
         </LinearLayout>
 
@@ -76,11 +77,6 @@
 
                 <Spinner
                     android:id="@+id/spinner1"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content" />
-
-                <Spinner
-                    android:id="@+id/spinner2"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
@@ -138,11 +134,6 @@
 
                 <Spinner
                     android:id="@+id/spinner3"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content" />
-
-                <Spinner
-                    android:id="@+id/spinner4"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content" />
             </RelativeLayout>

@@ -1,132 +1,222 @@
 package com.example.notest;
 
-import android.R.layout;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
 public class Activity_Test extends Activity {
-	int a;
+	int a,a2;
 	TextView t1;
-	SeekBar sb1,sb2 ;
-	Boolean ntos=true;
+	SeekBar sb1, sb2;
+	Boolean ntos = true;
 	View nsSelect;
 	View snSelect;
-	
-	SeekBar seekbar;
-	EditText text;
+
+	SeekBar seekbar,seekbar2;
+	EditText text,text2;
+	String spin, spin2;
+	Spinner spinner, spinner2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
-		
+
 		setContentView(R.layout.activity_activity__test);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		
-		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-		Spinner spinner1 = (Spinner) findViewById(R.id.spinner2);
-		Spinner spinner2 = (Spinner) findViewById(R.id.spinner3);
-		Spinner spinner3 = (Spinner) findViewById(R.id.spinner4);
-		
+
+		spinner = (Spinner) findViewById(R.id.spinner1);
+		spinner2 = (Spinner) findViewById(R.id.spinner3);
+
 		nsSelect = findViewById(R.id.nsSelect);
 		snSelect = findViewById(R.id.snSelect);
-		
+
+		ntos = true;
 		seekbar = (SeekBar) findViewById(R.id.nsSeekbar);
 		text = (EditText) findViewById(R.id.nsSeektext);
+		
+		sb2 = (SeekBar) findViewById(R.id.sb2);
+		text2 = (EditText) findViewById(R.id.editText1);
 		seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-			
+
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {}
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+
 			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {}
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
-				a=progress;
+				a = progress;
 				text.setText(String.valueOf(progress));
 			}
 		});
-		
+
 		text.addTextChangedListener(new TextWatcher() {
-			
+
 			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+			}
+
 			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {}
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
+			}
+
 			@Override
 			public void afterTextChanged(Editable a) {
-				try{
-				String filtered_str = a.toString();
-				if(Integer.parseInt(filtered_str) >=0 && Integer.parseInt(filtered_str) <=100){
-					seekbar.setProgress(Integer.parseInt(filtered_str));
+				try {
+					String filtered_str = a.toString();
+					if (Integer.parseInt(filtered_str) >= 0
+							&& Integer.parseInt(filtered_str) <= 100) {
+						seekbar.setProgress(Integer.parseInt(filtered_str));
 					}
-				}catch(Exception e){}
+				} catch (Exception e) {
+				}
 			}
 		});
+
 		
-		ArrayAdapter adapter =
-				ArrayAdapter.createFromResource(this, R.array.test, android.R.layout.simple_spinner_item);
-		
+		sb2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				a2 = progress;
+				text2.setText(String.valueOf(progress));
+			}
+		});
+
+		text2.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable a) {
+				try {
+					String filtered_str = a.toString();
+					if (Integer.parseInt(filtered_str) >= 0
+							&& Integer.parseInt(filtered_str) <= 100) {
+						sb2.setProgress(Integer.parseInt(filtered_str));
+					}
+				} catch (Exception e) {
+				}
+			}
+		});
+		ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
+				R.array.test, android.R.layout.simple_spinner_item);
+
 		spinner.setAdapter(adapter);
-		spinner1.setAdapter(adapter);
 		spinner2.setAdapter(adapter);
-		spinner3.setAdapter(adapter);
-		
+
+		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				spin = (String) spinner.getSelectedItem();
+				System.out.println("sdf:" + spin);
+
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+
+		spinner2.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				spin2 = (String) spinner2.getSelectedItem();
+
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+
 	}
 
 	public void onClick(View v) {
-		
+
 		switch (v.getId()) {
 		case R.id.stbt: {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			serviceIntent.putExtra("noise", seekbar.getProgress());
 			serviceIntent.putExtra("ntos", ntos);
-			System.out.println("click:"+a);
+			if (ntos == true) {
+				serviceIntent.putExtra("spin", spin);
+			} else {
+				serviceIntent.putExtra("spin2", spin2);
+			}
+			System.out.println("click:" + a);
 			startService(serviceIntent);
 			break;
-			}
+		}
 
 		case R.id.ebt: {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			stopService(serviceIntent);
 			break;
-			}
+		}
 		// 3. noise->silent
-		case R.id.ns:{
+		case R.id.ns: {
 			snSelect.setVisibility(8);
 			nsSelect.setVisibility(0);
-			ntos=true;
+
+			ntos = true;
 			break;
-			}
+		}
 		// 3. silent->noise
-		case R.id.sn:{
+		case R.id.sn: {
 			snSelect.setVisibility(0);
 			nsSelect.setVisibility(8);
-			ntos=false;
+			ntos = false;
 			break;
-			}
-		case R.id.save:{
-			
+		}
+		case R.id.save: {
+
 		}
 
 		}
-		
+
 	}
 
 }

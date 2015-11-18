@@ -14,7 +14,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-public class NoService extends Service{
+public class NoService extends Service {
 	Handler hd = new Handler();
 	private AudioReader audioReader;
 	private int sampleRate = 8000;
@@ -26,40 +26,46 @@ public class NoService extends Service{
 	AudioManager am;
 	int noise;
 	boolean ntos;
-    public void onCreate()
-    {
-        super.onCreate();
-        Log.i("superdroid", "onCreate()");
-        ac = new int[interval];
-        for(int i=0;i<ac.length;i++){
-        	ac[i]=0;
-        }
-        audioReader = new AudioReader();
-		
-		am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        
-        Intent intent = new Intent(this, Activity_Test.class );
-        PendingIntent pIntent = PendingIntent.getActivity( this, 0, intent, 
-                                            PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification noti = new Notification.Builder(this)
-                                      .setContentTitle("NoTest")
-                                      .setContentText("실행중")
-                                      .setSmallIcon( R.drawable.ic_launcher )
-                                      .setContentIntent( pIntent )
-                                      .build();
-        
-        // 2. 포그라운드 서비스 설정 (지각할 수 있는 서비스가 된다)
-        // ====================================================================
-        startForeground( 1234, noti );
-    }
+	String spin, spin2;
 
-    public int onStartCommand( Intent intent, int flags, int startId )
-    {
-        super.onStartCommand( intent, flags, startId );
-        Log.i("superdroid", "onStartCommand()");
-    	noise = intent.getIntExtra("noise", 0);
-    	ntos=intent.getBooleanExtra("ntos", true);
-    	System.out.println("sc:"+noise);
+	public void onCreate() {
+		super.onCreate();
+		Log.i("superdroid", "onCreate()");
+		ac = new int[interval];
+		for (int i = 0; i < ac.length; i++) {
+			ac[i] = 0;
+		}
+		audioReader = new AudioReader();
+
+		am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+		Intent intent = new Intent(this, Activity_Test.class);
+		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		Notification noti = new Notification.Builder(this)
+				.setContentTitle("NoTest").setContentText("실행중")
+				.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
+				.build();
+
+		// 2. 포그라운드 서비스 설정 (지각할 수 있는 서비스가 된다)
+		// ====================================================================
+		startForeground(1234, noti);
+	}
+
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		super.onStartCommand(intent, flags, startId);
+		Log.i("superdroid", "onStartCommand()");
+		noise = intent.getIntExtra("noise", 0);
+
+		ntos = intent.getBooleanExtra("ntos", true);
+		if (ntos == true) {
+			spin = intent.getStringExtra("spin");
+		} else {
+			spin2 = intent.getStringExtra("spin2");
+		}
+		System.out.println("sc:" + noise);
+		System.out.println("spin:" + spin);
+		System.out.println("spin2:" + spin2);
 		audioReader.startReader(sampleRate, inputBlockSize * sampleDecimate,
 				new AudioReader.Listener() {
 					@Override
@@ -69,11 +75,12 @@ public class NoService extends Service{
 
 							@Override
 							public void run() {
-								
-								if(ac[0]>0){
 
-								};
-								//text.setText(ac[0] + " dB"); // 앱에 데시벨 표시
+								if (ac[0] > 0) {
+
+								}
+								;
+								// text.setText(ac[0] + " dB"); // 앱에 데시벨 표시
 								// 매초마다 데시벨 저장
 								for (int j = ac.length - 1; j > 0; j--) {
 									ac[j] = ac[j - 1];
@@ -94,23 +101,46 @@ public class NoService extends Service{
 								}
 
 								// 상태변화
-								if(ntos==true){
-								switch (am.getRingerMode()) {
-								case AudioManager.RINGER_MODE_SILENT:
-									Log.i("MyApp", "Silent mode");
-									break;
-								case AudioManager.RINGER_MODE_VIBRATE:
-									Log.i("MyApp", "Vibrate mode");
-									break;
-								case AudioManager.RINGER_MODE_NORMAL:
-									Log.i("MyApp", "Normal mode");
-									if (avg < noise) {
-										am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+								if (ntos == true) {
+									switch (spin) {
+									case "Bell":
+										if (avg < noise) {
+											am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+										}
+										break;
+									case "NoSound":
+										if (avg < noise) {
+											am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+										}
+										break;
+									case "Manner":
+										if (avg < noise) {
+											am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+										}
+										break;
+
+
 									}
-									break;
+								} else {
+									switch (spin2) {
+									case "Bell":
+										if (avg > noise) {
+											am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+										}
+										break;
+									case "NoSound":
+										if (avg > noise) {
+											am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+										}
+										break;
+									case "Manner":
+										if (avg > noise) {
+											am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+										}
+										break;
+									}
 
-								}}else{}
-
+								}
 							}
 						});
 					}
@@ -119,16 +149,15 @@ public class NoService extends Service{
 					public void onReadError(int error) {
 					}
 				});
-        
-        return START_STICKY; 
-    }
 
-    public void onDestroy()
-    {
-        Log.i("superdroid", "onDestroy()");
-        audioReader.stopReader();
-        super.onDestroy();
-    }
+		return START_STICKY;
+	}
+
+	public void onDestroy() {
+		Log.i("superdroid", "onDestroy()");
+		audioReader.stopReader();
+		super.onDestroy();
+	}
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -136,5 +165,4 @@ public class NoService extends Service{
 		return null;
 	}
 
-	
 }
