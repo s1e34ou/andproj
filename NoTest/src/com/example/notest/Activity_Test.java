@@ -152,12 +152,12 @@ public class Activity_Test extends Activity {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				if(a>a2){
-					a=a-1;
+					Toast.makeText(Activity_Test.this, "Noise Db가 Silent Db보다 작을수 없습니다.", Toast.LENGTH_SHORT).show();
+					a2=a+1;
 					text.setText(String.valueOf(a));
 					text2.setText(String.valueOf(a2));
 					seekbar.setProgress(a);
 					sb2.setProgress(a2);
-					Toast.makeText(Activity_Test.this, "Noise Db가 Silent Db보다 작을수 없습니다.", Toast.LENGTH_SHORT).show();
 
 				}else{
 					text2.setText(String.valueOf(a2));
@@ -172,8 +172,6 @@ public class Activity_Test extends Activity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				a2 = progress;
-				
-				
 				
 			}
 		});
