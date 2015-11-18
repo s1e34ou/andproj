@@ -41,6 +41,10 @@
             android:name=".Help1"
             android:label="@string/title_activity_help1" >
         </activity>
+        <activity
+            android:name=".HelpTest"
+            android:label="@string/title_activity_help_test" >
+        </activity>
     </application>
 
 </manifest>

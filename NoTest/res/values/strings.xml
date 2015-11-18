@@ -15,5 +15,6 @@
 
     <string name="title_activity_help">Help</string>
     <string name="title_activity_help1">Help1</string>
+    <string name="title_activity_help_test">HelpTest</string>
 
 </resources>

@@ -238,7 +238,7 @@ public class Activity_Test extends Activity {
 			}
 			System.out.println("click:" + a);
 			startService(serviceIntent);
-			Toast.makeText(this, "시작되었습니다", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this,"최저"+text.getText()+"최고"+text2.getText()+"시작되었습니다", Toast.LENGTH_SHORT).show();
 			break;
 		}
 
@@ -274,7 +274,7 @@ public class Activity_Test extends Activity {
 			Intent intent = new Intent();
 
 			ComponentName componentName = new ComponentName(
-					"com.example.notest", "com.example.notest.Help");
+					"com.example.notest", "com.example.notest.HelpTest");
 			intent.setComponent(componentName);
 
 			startActivity(intent);
