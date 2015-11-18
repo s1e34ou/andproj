@@ -25,7 +25,7 @@ public class NoService extends Service {
 	int[] ac; // 데시벨 저장
 	int sum, avg,count=1;
 	AudioManager am;
-	int noise;
+	int noise1,noise2;
 	boolean ntos;
 	String spin, spin2;
 
@@ -56,15 +56,11 @@ public class NoService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
 		Log.i("superdroid", "onStartCommand()");
-		noise = intent.getIntExtra("noise", 0);
+		noise1 = intent.getIntExtra("noise1", 0);
+		noise2 = intent.getIntExtra("noise2", 0);
 
-		ntos = intent.getBooleanExtra("ntos", true);
-		if (ntos == true) {
 			spin = intent.getStringExtra("spin");
-		} else {
 			spin2 = intent.getStringExtra("spin2");
-		}
-		System.out.println("sc:" + noise);
 		System.out.println("spin:" + spin);
 		System.out.println("spin2:" + spin2);
 		audioReader.startReader(sampleRate, inputBlockSize * sampleDecimate,
@@ -103,44 +99,40 @@ public class NoService extends Service {
 								}
 
 								// 상태변화
-								if (ntos == true) {
 									switch (spin) {
 									case "Bell":
-										if (avg < noise) {
+										if (avg < noise1 ) {
 											am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 										}
 										break;
 									case "NoSound":
-										if (avg < noise) {
+										if (avg < noise1 ) {
 											am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 										}
 										break;
 									case "Manner":
-										if (avg < noise) {
+										if (avg < noise1 ) {
 											am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
 										}
 										break;
-
-
 									}
-								} else {
+
 									switch (spin2) {
 									case "Bell":
-										if (avg >= noise) {
+										if (avg >= noise2) {
 											am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 										}
 										break;
 									case "NoSound":
-										if (avg >= noise) {
+										if (avg >= noise2) {
 											am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 										}
 										break;
 									case "Manner":
-										if (avg >= noise) {
+										if (avg >= noise2) {
 											am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
 										}
 										break;
-									}
 
 								}
 							}
