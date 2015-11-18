@@ -29,7 +29,6 @@ public class Activity_Test extends Activity {
 	int a, a2, act,avg;
 	TextView t1,t2;
 	SeekBar sb1, sb2;
-	Boolean ntos = true;
 	View nsSelect;
 	View snSelect;
 
@@ -88,7 +87,6 @@ public class Activity_Test extends Activity {
 		snSelect = findViewById(R.id.snSelect);
 		t1 = (TextView) findViewById(R.id.textView2);
 		t2=(TextView) findViewById(R.id.TextView01);
-		ntos = true;
 		seekbar = (SeekBar) findViewById(R.id.nsSeekbar);
 		text = (EditText) findViewById(R.id.nsSeektext);
 		text.setText(String.valueOf(seekbar.getProgress()));
@@ -112,6 +110,9 @@ public class Activity_Test extends Activity {
 					boolean fromUser) {
 				a = progress;
 				text.setText(String.valueOf(progress));
+				if(a>a2){
+					a2=a+1;
+				}
 			}
 		});
 
@@ -156,6 +157,9 @@ public class Activity_Test extends Activity {
 					boolean fromUser) {
 				a2 = progress;
 				text2.setText(String.valueOf(progress));
+				if(a>a2){
+					a=a2-1;
+				}
 			}
 		});
 
@@ -229,13 +233,10 @@ public class Activity_Test extends Activity {
 			start.setEnabled(false);
 			end.setEnabled(true);
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
-			serviceIntent.putExtra("noise", seekbar.getProgress());
-			serviceIntent.putExtra("ntos", ntos);
-			if (ntos == true) {
+			serviceIntent.putExtra("noise1", seekbar.getProgress());
+			serviceIntent.putExtra("noise2", sb2.getProgress());
 				serviceIntent.putExtra("spin", spin);
-			} else {
 				serviceIntent.putExtra("spin2", spin2);
-			}
 			System.out.println("click:" + a);
 			startService(serviceIntent);
 			Toast.makeText(this,"최저"+text.getText()+"최고"+text2.getText()+"시작되었습니다", Toast.LENGTH_SHORT).show();
@@ -257,7 +258,6 @@ public class Activity_Test extends Activity {
 
 			ns.setEnabled(false);
 			sn.setEnabled(true);
-			ntos = true;
 			break;
 		}
 		// 3. silent->noise
@@ -266,7 +266,6 @@ public class Activity_Test extends Activity {
 			nsSelect.setVisibility(8);
 			ns.setEnabled(true);
 			sn.setEnabled(false);
-			ntos = false;
 			break;
 		}
 		case R.id.help: {
