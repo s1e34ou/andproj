@@ -1,10 +1,15 @@
 package com.example.notest;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
@@ -20,22 +25,29 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Activity_Test extends Activity {
-	int a,a2;
+	int a, a2, act,avg;
 	TextView t1;
 	SeekBar sb1, sb2;
 	Boolean ntos = true;
 	View nsSelect;
 	View snSelect;
 
-	SeekBar seekbar,seekbar2;
-	EditText text,text2;
+	SeekBar seekbar, seekbar2;
+	EditText text, text2;
 	String spin, spin2;
 	Spinner spinner, spinner2;
-	
-	
+
 	Button ns;
 	Button sn;
-	Button start,end;
+	Button start, end;
+
+	@Override
+	protected void onDestroy() {
+		unregisterReceiver(mRecevier);
+		super.onDestroy();
+	}
+
+	private BroadcastReceiver mRecevier;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +57,46 @@ public class Activity_Test extends Activity {
 		setContentView(R.layout.activity_activity__test);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction("com.example.notest.act");
+		mRecevier = new BroadcastReceiver() {
+
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				if (intent.getAction().equals("com.example.notest.act")) {
+					act = intent.getIntExtra("act", 0);
+					avg = intent.getIntExtra("avg", 0);
+					System.out.println("act:" + act);
+						t1.setText("ÇöÀç dB : "+act+", Æò±Õ dB : "+avg);	
+					
+
+				}
+
+			}
+
+		};
+		registerReceiver(mRecevier, intentFilter);
+
 		spinner = (Spinner) findViewById(R.id.spinner1);
 		spinner2 = (Spinner) findViewById(R.id.spinner3);
-
-		
 		ns = (Button) findViewById(R.id.ns);
 		sn = (Button) findViewById(R.id.sn);
 		ns.setEnabled(false);
-		start= (Button)findViewById(R.id.stbt);
-		end = (Button)findViewById(R.id.ebt);
+		start = (Button) findViewById(R.id.stbt);
+		end = (Button) findViewById(R.id.ebt);
 		end.setEnabled(false);
 		nsSelect = findViewById(R.id.nsSelect);
 		snSelect = findViewById(R.id.snSelect);
-
+		t1 = (TextView) findViewById(R.id.textView2);
 		ntos = true;
 		seekbar = (SeekBar) findViewById(R.id.nsSeekbar);
 		text = (EditText) findViewById(R.id.nsSeektext);
 		text.setText(String.valueOf(seekbar.getProgress()));
-		
+
 		sb2 = (SeekBar) findViewById(R.id.sb2);
 		text2 = (EditText) findViewById(R.id.editText1);
 		text2.setText(String.valueOf(sb2.getProgress()));
+
 		seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
 			@Override
@@ -103,14 +134,13 @@ public class Activity_Test extends Activity {
 					if (Integer.parseInt(filtered_str) >= 0
 							&& Integer.parseInt(filtered_str) <= 100) {
 						seekbar.setProgress(Integer.parseInt(filtered_str));
-						Selection.setSelection(a, a.length()); 
+						Selection.setSelection(a, a.length());
 					}
 				} catch (Exception e) {
 				}
 			}
 		});
 
-		
 		sb2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
 			@Override
@@ -138,7 +168,7 @@ public class Activity_Test extends Activity {
 
 			@Override
 			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) { 
+					int arg2, int arg3) {
 			}
 
 			@Override
@@ -148,7 +178,7 @@ public class Activity_Test extends Activity {
 					if (Integer.parseInt(filtered_str) >= 0
 							&& Integer.parseInt(filtered_str) <= 100) {
 						sb2.setProgress(Integer.parseInt(filtered_str));
-						Selection.setSelection(a, a.length()); 
+						Selection.setSelection(a, a.length());
 					}
 				} catch (Exception e) {
 				}
@@ -225,7 +255,7 @@ public class Activity_Test extends Activity {
 
 			ns.setEnabled(false);
 			sn.setEnabled(true);
-			ntos=true;
+			ntos = true;
 			break;
 		}
 		// 3. silent->noise
@@ -234,17 +264,17 @@ public class Activity_Test extends Activity {
 			nsSelect.setVisibility(8);
 			ns.setEnabled(true);
 			sn.setEnabled(false);
-			ntos=false;
+			ntos = false;
 			break;
 		}
-		case R.id.help:{
-			
+		case R.id.help: {
+
 			Intent intent = new Intent();
-			
-			ComponentName componentName = 
-					new ComponentName("com.example.notest", "com.example.notest.Help");
+
+			ComponentName componentName = new ComponentName(
+					"com.example.notest", "com.example.notest.Help");
 			intent.setComponent(componentName);
-			
+
 			startActivity(intent);
 		}
 

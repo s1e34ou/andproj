@@ -33,7 +33,7 @@ public class NoService extends Service {
 		Log.i("superdroid", "onCreate()");
 		ac = new int[interval];
 		for (int i = 0; i < ac.length; i++) {
-			ac[i] = 0;
+			ac[i] = 30;
 		}
 		audioReader = new AudioReader();
 
@@ -77,9 +77,11 @@ public class NoService extends Service {
 							public void run() {
 
 								if (ac[0] > 0) {
-
+									Intent act = new Intent("com.example.notest.act");
+									act.putExtra("act", ac[0]);
+									act.putExtra("avg", avg);
+									sendBroadcast(act);
 								}
-								;
 								// text.setText(ac[0] + " dB"); // 앱에 데시벨 표시
 								// 매초마다 데시벨 저장
 								for (int j = ac.length - 1; j > 0; j--) {
@@ -94,7 +96,6 @@ public class NoService extends Service {
 									}
 								}
 								avg = sum / interval;
-
 								for (int i = 0; i < 6; i++) {
 									System.out.println(ac[i * 10] + " avg : "
 											+ avg);
