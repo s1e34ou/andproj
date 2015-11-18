@@ -109,9 +109,15 @@ public class Activity_Test extends Activity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				a = progress;
-				text.setText(String.valueOf(progress));
+				
 				if(a>a2){
-					a2=a+1;
+					a2=a2+1;
+					text.setText(String.valueOf(a));
+					text2.setText(String.valueOf(a2));
+					seekbar.setProgress(a);
+					sb2.setProgress(a2);
+				}else{
+					text.setText(String.valueOf(progress));
 				}
 			}
 		});
@@ -156,9 +162,16 @@ public class Activity_Test extends Activity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				a2 = progress;
-				text2.setText(String.valueOf(progress));
+				
 				if(a>a2){
-					a=a2-1;
+					a=a-1;
+					text.setText(String.valueOf(a));
+					text2.setText(String.valueOf(a2));
+					seekbar.setProgress(a);
+					sb2.setProgress(a2);
+
+				}else{
+					text2.setText(String.valueOf(progress));
 				}
 			}
 		});
