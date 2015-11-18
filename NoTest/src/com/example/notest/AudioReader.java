@@ -12,7 +12,7 @@ public class AudioReader {
 		public static final int ERR_READ_FAILED = 2;
 
 		public abstract void onReadComplete(int decibel);
-
+		
 		public abstract void onReadError(int error);
 	}
 

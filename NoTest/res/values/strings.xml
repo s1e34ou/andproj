@@ -4,5 +4,15 @@
     <string name="app_name">NoTest</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_test">Test</string>
+    <string name="title_activity_activity__test">Activity_Test</string>
+
+    <string-array name="test">
+        <item>Bell</item>
+        <item>NoSound</item>
+        <item>Manner</item>
+    </string-array>
+
+    <string name="title_activity_help">Help</string>
 
 </resources>
