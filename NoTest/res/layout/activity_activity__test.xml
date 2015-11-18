@@ -1,11 +1,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="473dp"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -75,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:max="100"
+                        android:max="150"
                         android:progress="20"
                         android:secondaryProgress="0" />
 
@@ -85,7 +86,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:hint="max = 150"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -124,7 +127,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:max="100"
+                        android:max="150"
                         android:progress="30" />
 
                     <EditText
@@ -134,7 +137,7 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="number"
-                        android:text="1234" >
+                        android:hint="max = 150" >
                     </EditText>
                 </LinearLayout>
             </LinearLayout>

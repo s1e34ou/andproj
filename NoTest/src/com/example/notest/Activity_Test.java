@@ -110,8 +110,7 @@ public class Activity_Test extends Activity {
 			}
 
 			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-			}
+			public void onStartTrackingTouch(SeekBar seekBar) {}
 
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
@@ -135,16 +134,17 @@ public class Activity_Test extends Activity {
 			}
 
 			@Override
-			public void afterTextChanged(Editable a) {
+			public void afterTextChanged(Editable e) {
 				try {
-					String filtered_str = a.toString();
+					String filtered_str = e.toString();
 					if (Integer.parseInt(filtered_str) >= 0
-							&& Integer.parseInt(filtered_str) <= 100) {
-						seekbar.setProgress(Integer.parseInt(filtered_str));
-						Selection.setSelection(a, a.length());
+							&& Integer.parseInt(filtered_str) <= 150) {
+						if(a>a2){
+							seekbar.setProgress(Integer.parseInt(filtered_str));
+							Selection.setSelection(e, e.length());
+						}
 					}
-				} catch (Exception e) {
-				}
+				} catch (Exception d) {}
 			}
 		});
 
@@ -191,15 +191,19 @@ public class Activity_Test extends Activity {
 			}
 
 			@Override
-			public void afterTextChanged(Editable a) {
+			public void afterTextChanged(Editable e) {
 				try {
-					String filtered_str = a.toString();
+					String filtered_str = e.toString();
 					if (Integer.parseInt(filtered_str) >= 0
-							&& Integer.parseInt(filtered_str) <= 100) {
-						sb2.setProgress(Integer.parseInt(filtered_str));
-						Selection.setSelection(a, a.length());
+							&& Integer.parseInt(filtered_str) <= 150) {
+						if(a>a2){
+							sb2.setProgress(Integer.parseInt(filtered_str));
+							Selection.setSelection(e, e.length());
+						}
+						
+						
 					}
-				} catch (Exception e) {
+				} catch (Exception d) {
 				}
 			}
 		});
