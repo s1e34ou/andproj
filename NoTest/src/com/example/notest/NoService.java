@@ -27,7 +27,7 @@ public class NoService extends Service {
 	AudioManager am;
 	int noise1,noise2;
 	boolean ntos;
-	String spin, spin2;
+	String spin, spin2,st;
 
 	public void onCreate() {
 		super.onCreate();
@@ -58,11 +58,10 @@ public class NoService extends Service {
 		Log.i("superdroid", "onStartCommand()");
 		noise1 = intent.getIntExtra("noise1", 0);
 		noise2 = intent.getIntExtra("noise2", 0);
-
+		st=intent.getStringExtra("st");
 			spin = intent.getStringExtra("spin");
 			spin2 = intent.getStringExtra("spin2");
-		System.out.println("spin:" + spin);
-		System.out.println("spin2:" + spin2);
+			
 		audioReader.startReader(sampleRate, inputBlockSize * sampleDecimate,
 				new AudioReader.Listener() {
 					@Override
@@ -77,10 +76,13 @@ public class NoService extends Service {
 									Intent act = new Intent("com.example.notest.act");
 									act.putExtra("act", ac[0]);
 									act.putExtra("avg", avg);
+									act.putExtra("sspin", spin);
+									act.putExtra("sspin2", spin2);
+									act.putExtra("nnoise1", noise1);
+									act.putExtra("nnoise2", noise2);
+									act.putExtra("stt", st);
 									sendBroadcast(act);
 								}
-								// text.setText(ac[0] + " dB"); // 앱에 데시벨 표시
-								// 매초마다 데시벨 저장
 								for (int j = ac.length - 1; j > 0; j--) {
 									ac[j] = ac[j - 1];
 								}
@@ -93,10 +95,6 @@ public class NoService extends Service {
 									}
 								}
 								avg = sum / interval;
-								for (int i = 0; i < 6; i++) {
-									System.out.println(ac[i * 10] + " avg : "
-											+ avg);
-								}
 
 								// 상태변화
 									switch (spin) {

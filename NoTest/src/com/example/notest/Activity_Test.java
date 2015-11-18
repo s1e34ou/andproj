@@ -25,14 +25,14 @@ import android.widget.Toast;
 
 public class Activity_Test extends Activity {
 	int a, a2, act,avg;
-	TextView t1,t2;
+	TextView t1,t2,t3,t4;
 	SeekBar sb1, sb2;
 	View nsSelect;
 	View snSelect;
 
 	SeekBar seekbar, seekbar2;
 	EditText text, text2;
-	String spin, spin2;
+	String spin="Bell", spin2="Bell",st;
 	Spinner spinner, spinner2;
 
 	Button ns;
@@ -64,9 +64,50 @@ public class Activity_Test extends Activity {
 				if (intent.getAction().equals("com.example.notest.act")) {
 					act = intent.getIntExtra("act", 0);
 					avg = intent.getIntExtra("avg", 0);
+					spin = intent.getStringExtra("sspin");
+					spin2 = intent.getStringExtra("sspin2");
+					
+						start.setEnabled(false);
+					a=intent.getIntExtra("nnoise1", 0);
+					a2=intent.getIntExtra("nnoise2", 0);
+					switch (spin) {
+					case "Bell":
+						spinner.setSelection(0);	
+						break;
+					case "NoSound":
+						spinner.setSelection(1);	
+						break;
+					case "Manner":
+						spinner.setSelection(2);	
+						break;
+
+					}
+					
+					switch (spin2) {
+					case "Bell":
+						spinner2.setSelection(0);	
+						break;
+					case "NoSound":
+						spinner2.setSelection(1);	
+						break;
+					case "Manner":
+						spinner2.setSelection(2);	
+						break;
+
+					}
+					
+					
+					
+					seekbar.setProgress(a);
+					sb2.setProgress(a2);
+					
+					
 					System.out.println("act:" + act);
 						t1.setText("현재 dB : "+act);	
 						t2.setText("평균 dB : "+avg);
+						t3.setText("시끄러운곳 -> 조용한곳 : "+String.valueOf(a)+"dB");
+						t4.setText("조용한곳 -> 시끄러운곳 : "+String.valueOf(a2)+"dB");
+						
 
 				}
 
@@ -85,6 +126,8 @@ public class Activity_Test extends Activity {
 		snSelect = findViewById(R.id.snSelect);
 		t1 = (TextView) findViewById(R.id.textView2);
 		t2=(TextView) findViewById(R.id.TextView01);
+		t3=(TextView)findViewById(R.id.textView3);
+		t4=(TextView)findViewById(R.id.textView4);
 		seekbar = (SeekBar) findViewById(R.id.nsSeekbar);
 		text = (EditText) findViewById(R.id.nsSeektext);
 		text.setText(String.valueOf(seekbar.getProgress()));
@@ -201,7 +244,6 @@ public class Activity_Test extends Activity {
 							Selection.setSelection(e, e.length());
 						}
 						
-						
 					}
 				} catch (Exception d) {
 				}
@@ -256,6 +298,8 @@ public class Activity_Test extends Activity {
 			serviceIntent.putExtra("noise2", sb2.getProgress());
 			serviceIntent.putExtra("spin", spin);
 			serviceIntent.putExtra("spin2", spin2);
+			serviceIntent.putExtra("st", "st");
+			
 			System.out.println("click:" + a);
 			startService(serviceIntent);
 			Toast.makeText(this,"최저"+text.getText()+"최고"+text2.getText()+"시작되었습니다", Toast.LENGTH_SHORT).show();

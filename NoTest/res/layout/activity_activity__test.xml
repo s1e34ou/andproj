@@ -175,7 +175,7 @@
 	    android:id="@+id/textView2"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_marginTop="25dp"
+	    android:layout_marginTop="5dp"
 	    android:text="현재 dB : "
 	    android:textSize="30dp" />
 
@@ -183,9 +183,21 @@
 	    android:id="@+id/TextView01"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_marginTop="25dp"
+	    android:layout_marginTop="5dp"
 	    android:text="평균 dB : "
 	    android:textSize="30dp" />
+
+	<TextView
+	    android:id="@+id/textView3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="시끄러운곳 -> 조용한곳 : " />
+
+	<TextView
+	    android:id="@+id/textView4"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="조용한곳 -> 시끄러운곳 : " />
 
 </LinearLayout>
 </ScrollView>
