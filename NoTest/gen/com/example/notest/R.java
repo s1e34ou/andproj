@@ -31,11 +31,11 @@ public final class R {
         public static final int action_settings=0x7f090011;
         public static final int ebt=0x7f090002;
         public static final int editText1=0x7f09000f;
+        public static final int help=0x7f090010;
         public static final int ns=0x7f090003;
         public static final int nsSeekbar=0x7f090008;
         public static final int nsSeektext=0x7f09000a;
         public static final int nsSelect=0x7f090005;
-        public static final int save=0x7f090010;
         public static final int sb2=0x7f09000e;
         public static final int sn=0x7f090004;
         public static final int snSelect=0x7f09000b;
@@ -49,17 +49,20 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_activity__test=0x7f030000;
+        public static final int activity_help=0x7f030001;
     }
     public static final class menu {
         public static final int activity__test=0x7f080000;
-        public static final int main=0x7f080001;
-        public static final int test=0x7f080002;
+        public static final int help=0x7f080001;
+        public static final int main=0x7f080002;
+        public static final int test=0x7f080003;
     }
     public static final class string {
         public static final int action_settings=0x7f050002;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050001;
         public static final int title_activity_activity__test=0x7f050004;
+        public static final int title_activity_help=0x7f050005;
         public static final int title_activity_test=0x7f050003;
     }
     public static final class style {

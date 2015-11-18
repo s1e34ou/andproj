@@ -1,22 +1,19 @@
 package com.example.notest;
 
-import android.R.layout;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
 public class Activity_Test extends Activity {
 	int a;
@@ -28,6 +25,9 @@ public class Activity_Test extends Activity {
 	
 	SeekBar seekbar;
 	EditText text;
+	
+	Button ns;
+	Button sn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,9 @@ public class Activity_Test extends Activity {
 		Spinner spinner1 = (Spinner) findViewById(R.id.spinner2);
 		Spinner spinner2 = (Spinner) findViewById(R.id.spinner3);
 		Spinner spinner3 = (Spinner) findViewById(R.id.spinner4);
+		
+		ns = (Button) findViewById(R.id.ns);
+		sn = (Button) findViewById(R.id.sn);
 		
 		nsSelect = findViewById(R.id.nsSelect);
 		snSelect = findViewById(R.id.snSelect);
@@ -111,6 +114,8 @@ public class Activity_Test extends Activity {
 		case R.id.ns:{
 			snSelect.setVisibility(8);
 			nsSelect.setVisibility(0);
+			ns.setEnabled(false);
+			sn.setEnabled(true);
 			ntos=true;
 			break;
 			}
@@ -118,10 +123,12 @@ public class Activity_Test extends Activity {
 		case R.id.sn:{
 			snSelect.setVisibility(0);
 			nsSelect.setVisibility(8);
+			ns.setEnabled(true);
+			sn.setEnabled(false);
 			ntos=false;
 			break;
 			}
-		case R.id.save:{
+		case R.id.help:{
 			
 		}
 
