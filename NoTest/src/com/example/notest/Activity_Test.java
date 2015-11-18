@@ -98,7 +98,8 @@ public class Activity_Test extends Activity {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				if(a>a2){
-					a2=a2+1;
+					Toast.makeText(Activity_Test.this, "Noise Db가 Silent Db보다 작을수 없습니다.", Toast.LENGTH_SHORT).show();
+					a=a2-1;
 					text.setText(String.valueOf(a));
 					text2.setText(String.valueOf(a2));
 					seekbar.setProgress(a);
