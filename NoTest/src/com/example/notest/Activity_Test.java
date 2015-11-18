@@ -99,6 +99,15 @@ public class Activity_Test extends Activity {
 
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
+				if(a>a2){
+					a=a2-1;
+					text.setText(String.valueOf(a));
+					text2.setText(String.valueOf(a2));
+					seekbar.setProgress(a);
+					sb2.setProgress(a2);
+				}else{
+					text.setText(String.valueOf(a));
+				}
 			}
 
 			@Override
@@ -110,15 +119,7 @@ public class Activity_Test extends Activity {
 					boolean fromUser) {
 				a = progress;
 				
-				if(a>a2){
-					a2=a2+1;
-					text.setText(String.valueOf(a));
-					text2.setText(String.valueOf(a2));
-					seekbar.setProgress(a);
-					sb2.setProgress(a2);
-				}else{
-					text.setText(String.valueOf(progress));
-				}
+				
 			}
 		});
 
@@ -152,6 +153,16 @@ public class Activity_Test extends Activity {
 
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
+				if(a>a2){
+					a2=a+1;
+					text.setText(String.valueOf(a));
+					text2.setText(String.valueOf(a2));
+					seekbar.setProgress(a);
+					sb2.setProgress(a2);
+
+				}else{
+					text2.setText(String.valueOf(a2));
+				}
 			}
 
 			@Override
@@ -163,16 +174,7 @@ public class Activity_Test extends Activity {
 					boolean fromUser) {
 				a2 = progress;
 				
-				if(a>a2){
-					a=a-1;
-					text.setText(String.valueOf(a));
-					text2.setText(String.valueOf(a2));
-					seekbar.setProgress(a);
-					sb2.setProgress(a2);
-
-				}else{
-					text2.setText(String.valueOf(progress));
-				}
+				
 			}
 		});
 
