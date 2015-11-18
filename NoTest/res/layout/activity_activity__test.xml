@@ -16,16 +16,9 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center"
-            android:text="TITLE"
+            android:text="AH"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -170,8 +163,18 @@
                 android:id="@+id/help"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Help" />
+                android:text="Help"
+                android:onClick="onClick" />
 
     </LinearLayout>
+
+	<TextView
+	    android:id="@+id/textView2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="40dp"
+	    android:textSize="70dp"
+	    android:text="Db측정" />
+
 </LinearLayout>
 </ScrollView>
