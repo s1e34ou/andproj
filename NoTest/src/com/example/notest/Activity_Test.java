@@ -1,6 +1,7 @@
 package com.example.notest;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -225,6 +226,13 @@ public class Activity_Test extends Activity {
 		}
 		case R.id.help:{
 			
+			Intent intent = new Intent();
+			
+			ComponentName componentName = 
+					new ComponentName("com.example.notest", "com.example.notest.Help");
+			intent.setComponent(componentName);
+			
+			startActivity(intent);
 		}
 
 		}
