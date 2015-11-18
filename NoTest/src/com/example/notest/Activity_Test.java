@@ -90,11 +90,11 @@ public class Activity_Test extends Activity {
 		seekbar = (SeekBar) findViewById(R.id.nsSeekbar);
 		text = (EditText) findViewById(R.id.nsSeektext);
 		text.setText(String.valueOf(seekbar.getProgress()));
-
+		a=seekbar.getProgress();
 		sb2 = (SeekBar) findViewById(R.id.sb2);
 		text2 = (EditText) findViewById(R.id.editText1);
 		text2.setText(String.valueOf(sb2.getProgress()));
-
+		a2=sb2.getProgress();
 		seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
 			@Override
@@ -118,7 +118,7 @@ public class Activity_Test extends Activity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				a = progress;
-				
+				text.setText(String.valueOf(a));
 				
 			}
 		});
@@ -173,7 +173,7 @@ public class Activity_Test extends Activity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				a2 = progress;
-				
+				text2.setText(String.valueOf(a2));  
 				
 			}
 		});
