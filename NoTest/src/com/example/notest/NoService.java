@@ -22,7 +22,7 @@ public class NoService extends Service {
 	private int sampleDecimate = 1;
 	int interval = 60;
 	int[] ac; // 데시벨 저장
-	int sum, avg;
+	int sum, avg,count=1;
 	AudioManager am;
 	int noise;
 	boolean ntos;
@@ -125,17 +125,17 @@ public class NoService extends Service {
 								} else {
 									switch (spin2) {
 									case "Bell":
-										if (avg > noise) {
+										if (avg >= noise) {
 											am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 										}
 										break;
 									case "NoSound":
-										if (avg > noise) {
+										if (avg >= noise) {
 											am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 										}
 										break;
 									case "Manner":
-										if (avg > noise) {
+										if (avg >= noise) {
 											am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
 										}
 										break;
