@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
@@ -33,6 +34,7 @@ public class Activity_Test extends Activity {
 	
 	Button ns;
 	Button sn;
+	Button start,end;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +50,21 @@ public class Activity_Test extends Activity {
 		
 		ns = (Button) findViewById(R.id.ns);
 		sn = (Button) findViewById(R.id.sn);
-		
+		ns.setEnabled(false);
+		start= (Button)findViewById(R.id.stbt);
+		end = (Button)findViewById(R.id.ebt);
+		end.setEnabled(false);
 		nsSelect = findViewById(R.id.nsSelect);
 		snSelect = findViewById(R.id.snSelect);
 
 		ntos = true;
 		seekbar = (SeekBar) findViewById(R.id.nsSeekbar);
 		text = (EditText) findViewById(R.id.nsSeektext);
+		text.setText(String.valueOf(seekbar.getProgress()));
 		
 		sb2 = (SeekBar) findViewById(R.id.sb2);
 		text2 = (EditText) findViewById(R.id.editText1);
+		text2.setText(String.valueOf(sb2.getProgress()));
 		seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
 			@Override
@@ -95,6 +102,7 @@ public class Activity_Test extends Activity {
 					if (Integer.parseInt(filtered_str) >= 0
 							&& Integer.parseInt(filtered_str) <= 100) {
 						seekbar.setProgress(Integer.parseInt(filtered_str));
+						Selection.setSelection(a, a.length()); 
 					}
 				} catch (Exception e) {
 				}
@@ -139,6 +147,7 @@ public class Activity_Test extends Activity {
 					if (Integer.parseInt(filtered_str) >= 0
 							&& Integer.parseInt(filtered_str) <= 100) {
 						sb2.setProgress(Integer.parseInt(filtered_str));
+						Selection.setSelection(a, a.length()); 
 					}
 				} catch (Exception e) {
 				}
@@ -186,6 +195,8 @@ public class Activity_Test extends Activity {
 
 		switch (v.getId()) {
 		case R.id.stbt: {
+			start.setEnabled(false);
+			end.setEnabled(true);
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			serviceIntent.putExtra("noise", seekbar.getProgress());
 			serviceIntent.putExtra("ntos", ntos);
@@ -200,6 +211,8 @@ public class Activity_Test extends Activity {
 		}
 
 		case R.id.ebt: {
+			start.setEnabled(true);
+			end.setEnabled(false);
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			stopService(serviceIntent);
 			break;
