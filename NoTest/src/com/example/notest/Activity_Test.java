@@ -235,11 +235,15 @@ public class Activity_Test extends Activity {
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			serviceIntent.putExtra("noise1", seekbar.getProgress());
 			serviceIntent.putExtra("noise2", sb2.getProgress());
-				serviceIntent.putExtra("spin", spin);
-				serviceIntent.putExtra("spin2", spin2);
+			serviceIntent.putExtra("spin", spin);
+			serviceIntent.putExtra("spin2", spin2);
 			System.out.println("click:" + a);
-			startService(serviceIntent);
-			Toast.makeText(this,"최저"+text.getText()+"최고"+text2.getText()+"시작되었습니다", Toast.LENGTH_SHORT).show();
+			if(a>a2){
+				Toast.makeText(this, "Noise Db가 Silent Db보다 작을수 없습니다.", Toast.LENGTH_SHORT).show();
+			}else{
+				startService(serviceIntent);
+				Toast.makeText(this,"최저"+text.getText()+"최고"+text2.getText()+"시작되었습니다", Toast.LENGTH_SHORT).show();
+			}
 			break;
 		}
 
