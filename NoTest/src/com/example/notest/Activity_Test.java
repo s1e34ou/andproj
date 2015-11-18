@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Activity_Test extends Activity {
 	int a, a2, act,avg;
@@ -81,10 +82,8 @@ public class Activity_Test extends Activity {
 		spinner2 = (Spinner) findViewById(R.id.spinner3);
 		ns = (Button) findViewById(R.id.ns);
 		sn = (Button) findViewById(R.id.sn);
-		ns.setEnabled(false);
 		start = (Button) findViewById(R.id.stbt);
 		end = (Button) findViewById(R.id.ebt);
-		end.setEnabled(false);
 		nsSelect = findViewById(R.id.nsSelect);
 		snSelect = findViewById(R.id.snSelect);
 		t1 = (TextView) findViewById(R.id.textView2);
@@ -239,6 +238,7 @@ public class Activity_Test extends Activity {
 			}
 			System.out.println("click:" + a);
 			startService(serviceIntent);
+			Toast.makeText(this, "시작되었습니다", Toast.LENGTH_SHORT).show();
 			break;
 		}
 
@@ -247,6 +247,7 @@ public class Activity_Test extends Activity {
 			end.setEnabled(false);
 			Intent serviceIntent = new Intent("com.example.notest.NoService");
 			stopService(serviceIntent);
+			Toast.makeText(this, "종료되었습니다.", Toast.LENGTH_SHORT).show();
 			break;
 		}
 		// 3. noise->silent
